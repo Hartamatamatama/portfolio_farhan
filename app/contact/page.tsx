@@ -19,6 +19,44 @@ export default function Contact() {
   const { ref: formRef, isVisible: formVisible, hasHydrated: formHydrated } = useInView();
   const { ref: factsRef, isVisible: factsVisible, hasHydrated: factsHydrated } = useInView();
 
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormStatus("submitting");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "c703eb86-90e9-46a7-847a-a4aa00f6e79a",
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setFormStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setFormStatus("idle"), 5000);
+      } else {
+        setFormStatus("error");
+        setTimeout(() => setFormStatus("idle"), 5000);
+      }
+    } catch (error) {
+      setFormStatus("error");
+      setTimeout(() => setFormStatus("idle"), 5000);
+    }
+  };
+
   const contacts = [
     { icon: "📧", label: "Email", value: "1123150117@global.ac.id", link: "mailto:1123150117@global.ac.id", color: "#06b6d4" },
     { icon: "💼", label: "LinkedIn", value: "farhan-hartama", link: "https://www.linkedin.com/in/farhan-hartama", color: "#3b82f6" },
@@ -140,7 +178,9 @@ export default function Contact() {
             }}>✉️</span>
             Send me a message
           </h2>
-          <form style={{
+          <form 
+            onSubmit={handleFormSubmit}
+            style={{
             background: "rgba(30, 41, 59, 0.3)",
             border: "1px solid rgba(100, 116, 139, 0.2)",
             borderRadius: "20px",
@@ -149,10 +189,12 @@ export default function Contact() {
             flexDirection: "column",
             gap: "20px",
           }}>
+            <input type="hidden" name="access_key" value="c703eb86-90e9-46a7-847a-a4aa00f6e79a" />
+            
             {[
-              { label: "Your Name", type: "text", placeholder: "John Doe" },
-              { label: "Your Email", type: "email", placeholder: "john@example.com" },
-              { label: "Subject", type: "text", placeholder: "Project Inquiry" },
+              { label: "Your Name", type: "text", name: "name", placeholder: "John Doe", required: true },
+              { label: "Your Email", type: "email", name: "email", placeholder: "john@example.com", required: true },
+              { label: "Subject", type: "text", name: "subject", placeholder: "Project Inquiry", required: false },
             ].map((field) => (
               <div key={field.label}>
                 <label style={{
@@ -166,6 +208,10 @@ export default function Contact() {
                 </label>
                 <input
                   type={field.type}
+                  name={field.name}
+                  required={field.required}
+                  value={formData[field.name as keyof typeof formData]}
+                  onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
                   placeholder={field.placeholder}
                   style={{
                     width: "100%",
@@ -203,6 +249,10 @@ export default function Contact() {
                 Your Message
               </label>
               <textarea
+                name="message"
+                required
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Tell me about your project..."
                 rows={6}
                 style={{
@@ -231,30 +281,48 @@ export default function Contact() {
                 }}
               ></textarea>
             </div>
+            
             <button
               type="submit"
+              disabled={formStatus === "submitting"}
               style={{
                 padding: "14px 36px",
-                background: "linear-gradient(to right, #06b6d4, #3b82f6)",
+                background: formStatus === "success" 
+                  ? "linear-gradient(to right, #22c55e, #10b981)"
+                  : formStatus === "error"
+                  ? "linear-gradient(to right, #ef4444, #f43f5e)"
+                  : "linear-gradient(to right, #06b6d4, #3b82f6)",
                 color: "white",
                 fontWeight: 600,
                 border: "none",
                 borderRadius: "12px",
-                cursor: "pointer",
+                cursor: formStatus === "submitting" ? "not-allowed" : "pointer",
                 fontSize: "1rem",
                 transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                 alignSelf: "flex-start",
+                opacity: formStatus === "submitting" ? 0.7 : 1,
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform = "translateY(-3px) scale(1.05)";
-                e.currentTarget.style.boxShadow = "0 12px 40px rgba(6, 182, 212, 0.4)";
+                if (formStatus !== "submitting") {
+                  e.currentTarget.style.transform = "translateY(-3px) scale(1.05)";
+                  e.currentTarget.style.boxShadow = formStatus === "success" 
+                    ? "0 12px 40px rgba(34, 197, 94, 0.4)"
+                    : formStatus === "error"
+                    ? "0 12px 40px rgba(239, 68, 68, 0.4)"
+                    : "0 12px 40px rgba(6, 182, 212, 0.4)";
+                }
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "none";
+                if (formStatus !== "submitting") {
+                  e.currentTarget.style.transform = "translateY(0) scale(1)";
+                  e.currentTarget.style.boxShadow = "none";
+                }
               }}
             >
-              Send Message →
+              {formStatus === "submitting" ? "Sending..." : 
+               formStatus === "success" ? "✓ Message Sent!" : 
+               formStatus === "error" ? "✕ Failed. Try again" : 
+               "Send Message →"}
             </button>
           </form>
         </div>
