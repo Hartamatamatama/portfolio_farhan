@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useInView } from "@/hooks/useInView";
+import { useSound } from "@/hooks/useSound";
 
 // Helper function untuk ASMR smooth style transition
 const getScrollStyle = (hasHydrated: boolean, isVisible: boolean, delay: string) => {
@@ -21,6 +22,7 @@ export default function Contact() {
 
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const { playHover, playClick } = useSound();
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -131,6 +133,7 @@ export default function Contact() {
                 gap: "12px",
               }}
               onMouseOver={(e) => {
+                playHover();
                 e.currentTarget.style.borderColor = contact.color;
                 e.currentTarget.style.transform = "translateY(-8px) scale(1.03)";
                 e.currentTarget.style.boxShadow = `0 20px 40px ${contact.color}20`;
@@ -142,6 +145,7 @@ export default function Contact() {
                 e.currentTarget.style.boxShadow = "none";
                 e.currentTarget.style.background = "rgba(30, 41, 59, 0.3)";
               }}
+              onClick={() => playClick()}
             >
               <div style={{ fontSize: "2.5rem" }}>{contact.icon}</div>
               <h3 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#e2e8f0" }}>
@@ -304,6 +308,7 @@ export default function Contact() {
               }}
               onMouseOver={(e) => {
                 if (formStatus !== "submitting") {
+                  playHover();
                   e.currentTarget.style.transform = "translateY(-3px) scale(1.05)";
                   e.currentTarget.style.boxShadow = formStatus === "success" 
                     ? "0 12px 40px rgba(34, 197, 94, 0.4)"
@@ -317,6 +322,9 @@ export default function Contact() {
                   e.currentTarget.style.transform = "translateY(0) scale(1)";
                   e.currentTarget.style.boxShadow = "none";
                 }
+              }}
+              onClick={() => {
+                if (formStatus !== "submitting") playClick();
               }}
             >
               {formStatus === "submitting" ? "Sending..." : 

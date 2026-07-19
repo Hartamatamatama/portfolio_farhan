@@ -3,9 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useSound } from "@/hooks/useSound";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isClient, setIsClient] = useState(false);
+  const { playHover, playSwoosh } = useSound();
+  
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   return (
     <nav style={{
@@ -14,7 +23,7 @@ export default function Navbar() {
       width: "100%",
       background: "transparent",
       backdropFilter: "blur(8px)",
-      WebkitBackdropFilter: "blur(8px)", // untuk Safari
+      WebkitBackdropFilter: "blur(8px)",
       borderBottom: "1px solid rgba(255, 255, 255, 0.03)",
       zIndex: 100,
       padding: "20px 40px",
@@ -35,6 +44,7 @@ export default function Navbar() {
         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
       onMouseOver={(e) => {
+        playHover();
         e.currentTarget.style.filter = "brightness(1.3) drop-shadow(0 0 10px rgba(6, 182, 212, 0.4))";
         e.currentTarget.style.transform = "scale(1.05)";
       }}
@@ -42,6 +52,7 @@ export default function Navbar() {
         e.currentTarget.style.filter = "none";
         e.currentTarget.style.transform = "scale(1)";
       }}
+      onClick={() => playSwoosh()}
       >
         FR
       </Link>
@@ -55,6 +66,9 @@ export default function Navbar() {
             <Link
               key={item}
               href={path}
+              onClick={() => {
+                if (!isActive) playSwoosh();
+              }}
               style={{
                 color: isActive ? "#06b6d4" : "#94a3b8",
                 textDecoration: "none",
@@ -65,6 +79,7 @@ export default function Navbar() {
                 position: "relative",
               }}
               onMouseOver={(e) => {
+                if (!isActive) playHover();
                 e.currentTarget.style.color = "#06b6d4";
                 e.currentTarget.style.textShadow = "0 0 10px rgba(6, 182, 212, 0.5)";
                 e.currentTarget.style.transform = "translateY(-2px)";

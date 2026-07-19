@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSound } from "@/hooks/useSound";
 
 export default function Home() {
   const [typedText, setTypedText] = useState("");
   const fullName = "Farhan Raisprawira Hartama";
   const [isLoaded, setIsLoaded] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const { playHover, playClick, playSwoosh } = useSound();
 
   useEffect(() => {
     setIsClient(true);
@@ -163,6 +165,7 @@ export default function Home() {
                 border: "2px solid rgba(6, 182, 212, 0.5)",
               }}
               onMouseOver={(e) => {
+                playHover();
                 e.currentTarget.style.background = "rgba(6, 182, 212, 0.1)";
                 e.currentTarget.style.borderColor = "#06b6d4";
                 e.currentTarget.style.transform = "translateY(-3px) scale(1.05)";
@@ -174,6 +177,7 @@ export default function Home() {
                 e.currentTarget.style.transform = "translateY(0) scale(1)";
                 e.currentTarget.style.boxShadow = "none";
               }}
+              onClick={() => playSwoosh()}
             >
               Get In Touch
             </a>
@@ -197,6 +201,7 @@ export default function Home() {
                 gap: "10px",
               }}
               onMouseOver={(e) => {
+                playHover();
                 e.currentTarget.style.background = "rgba(168, 85, 247, 0.1)";
                 e.currentTarget.style.borderColor = "#a855f7";
                 e.currentTarget.style.transform = "translateY(-3px) scale(1.05)";
@@ -208,6 +213,7 @@ export default function Home() {
                 e.currentTarget.style.transform = "translateY(0) scale(1)";
                 e.currentTarget.style.boxShadow = "none";
               }}
+              onClick={() => playClick()}
             >
               <span>📄</span> Download CV
             </a>
