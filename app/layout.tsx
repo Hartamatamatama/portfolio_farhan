@@ -43,7 +43,8 @@ export default function RootLayout({
   return (
     <html lang="id" data-scroll-behavior="smooth">
       <body
-        className={`${geist.variable} ${geistMono.variable} antialiased bg-slate-950 text-white overflow-x-hidden`}
+        className={`${geist.variable} ${geistMono.variable} antialiased bg-slate-950 text-white`}
+        style={{ overflowX: "hidden" }}
       >
         <AnimatedBackground />
         <Navbar />

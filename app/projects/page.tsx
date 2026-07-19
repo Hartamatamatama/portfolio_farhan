@@ -159,7 +159,7 @@ export default function Projects() {
                 transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                 cursor: "default",
                 position: "relative",
-                overflow: "hidden",
+                
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.borderColor = project.accent;

@@ -36,11 +36,9 @@ export default function Home() {
   return (
     <main style={{
       minHeight: "100vh",
-      width: "100vw",
-      maxWidth: "100%",
+      width: "100%",
+      maxWidth: "100vw",
       color: "#ffffff",
-      overflowX: "hidden",
-      overflowY: "auto",
       position: "relative",
     }}>
       {/* Hero Section */}

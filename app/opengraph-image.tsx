@@ -22,7 +22,7 @@ export default async function Image() {
           justifyContent: "center",
           fontFamily: "sans-serif",
           position: "relative",
-          overflow: "hidden",
+          
         }}
       >
         {/* Decorative Orbs */}

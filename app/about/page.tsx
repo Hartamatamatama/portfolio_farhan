@@ -28,7 +28,6 @@ export default function About() {
       position: "relative",
     }}>
       <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 20px", position: "relative", zIndex: 1 }}>
-        {/* Title */}
         <div ref={titleRef} style={{
           marginBottom: "60px",
           ...getScrollStyle(titleHydrated, titleVisible, "0s")
