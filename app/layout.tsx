@@ -15,8 +15,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Farhan Raisprawira - Portfolio",
-  description: "Full-stack developer | Mobile & Web | ITB Bina Sarana Global",
+  title: "Farhan Raisprawira | Full-stack Developer",
+  description: "Portfolio of Farhan Raisprawira Hartama, a Full-stack Developer & Mobile Engineer specializing in Next.js, React, Flutter, and Go.",
+  keywords: ["Farhan Raisprawira", "Farhan Hartama", "Portfolio", "Full-stack Developer", "Flutter Developer", "Frontend", "Backend", "Next.js"],
+  authors: [{ name: "Farhan Raisprawira Hartama" }],
+  openGraph: {
+    title: "Farhan Raisprawira | Full-stack Developer",
+    description: "Portfolio of Farhan Raisprawira Hartama, a Full-stack Developer & Mobile Engineer.",
+    url: "https://portfolio-eta-umber-75.vercel.app",
+    siteName: "Farhan's Portfolio",
+    locale: "id_ID",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Farhan Raisprawira | Full-stack Developer",
+    description: "Portfolio of Farhan Raisprawira Hartama, a Full-stack Developer & Mobile Engineer.",
+  },
 };
 
 export default function RootLayout({
@@ -31,7 +46,9 @@ export default function RootLayout({
       >
         <AnimatedBackground />
         <Navbar />
-        {children}
+        <div className="page-transition">
+          {children}
+        </div>
       </body>
     </html>
   );

@@ -154,30 +154,64 @@ export default function Home() {
             <a
               href="/contact"
               style={{
-                padding: "14px 36px",
+                padding: "16px 32px",
                 background: "transparent",
-                color: "#06b6d4",
+                color: "#e2e8f0",
                 fontWeight: 600,
-                borderRadius: "12px",
                 textDecoration: "none",
-                fontSize: "1rem",
+                borderRadius: "12px",
+                fontSize: "1.1rem",
+                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                 border: "2px solid rgba(6, 182, 212, 0.5)",
-                transition: "all 0.3s",
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.background = "rgba(6, 182, 212, 0.1)";
                 e.currentTarget.style.borderColor = "#06b6d4";
-                e.currentTarget.style.transform = "translateY(-3px)";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(6, 182, 212, 0.2)";
+                e.currentTarget.style.transform = "translateY(-3px) scale(1.05)";
+                e.currentTarget.style.boxShadow = "0 10px 30px rgba(6, 182, 212, 0.3)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.background = "transparent";
                 e.currentTarget.style.borderColor = "rgba(6, 182, 212, 0.5)";
-                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.transform = "translateY(0) scale(1)";
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
               Get In Touch
+            </a>
+            
+            {/* Download CV Button */}
+            <a
+              href="/Farhan_Raisprawira_CV.pdf"
+              target="_blank"
+              style={{
+                padding: "16px 32px",
+                background: "transparent",
+                color: "#e2e8f0",
+                fontWeight: 600,
+                textDecoration: "none",
+                borderRadius: "12px",
+                fontSize: "1.1rem",
+                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                border: "2px solid rgba(168, 85, 247, 0.5)",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.background = "rgba(168, 85, 247, 0.1)";
+                e.currentTarget.style.borderColor = "#a855f7";
+                e.currentTarget.style.transform = "translateY(-3px) scale(1.05)";
+                e.currentTarget.style.boxShadow = "0 10px 30px rgba(168, 85, 247, 0.3)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "rgba(168, 85, 247, 0.5)";
+                e.currentTarget.style.transform = "translateY(0) scale(1)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <span>📄</span> Download CV
             </a>
           </div>
 
