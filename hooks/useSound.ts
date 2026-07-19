@@ -104,6 +104,35 @@ export function useSound() {
     }
   }, [initAudio]);
 
+  // Efek "Tik" untuk setiap huruf yang diketik
+  const playTyping = useCallback(() => {
+    try {
+      initAudio();
+      const ctx = audioCtxRef.current;
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      // Suara tik pendek dan tinggi
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(600, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.05);
+
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.03, ctx.currentTime + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.05);
+    } catch (e) {
+      // Ignore
+    }
+  }, [initAudio]);
+
   // Setup global click listener untuk initialize audio di first interaction
   useEffect(() => {
     const handleFirstInteraction = () => {
@@ -125,5 +154,5 @@ export function useSound() {
     };
   }, [initAudio]);
 
-  return { playHover, playClick, playSwoosh };
+  return { playHover, playClick, playSwoosh, playTyping };
 }

@@ -8,7 +8,7 @@ export default function Home() {
   const fullName = "Farhan Raisprawira Hartama";
   const [isLoaded, setIsLoaded] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const { playHover, playClick, playSwoosh } = useSound();
+  const { playHover, playClick, playSwoosh, playTyping } = useSound();
 
   useEffect(() => {
     setIsClient(true);
@@ -19,12 +19,17 @@ export default function Home() {
     let index = 0;
     const interval = setInterval(() => {
       setTypedText(fullName.slice(0, index));
+      // Hanya bunyikan suara jika bukan spasi dan audio tidak diblokir
+      if (index > 0 && index <= fullName.length && fullName[index - 1] !== " ") {
+        playTyping();
+      }
+      
       index++;
       if (index > fullName.length) clearInterval(interval);
     }, 100);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [playTyping]);
 
   // SSR fallback style vs client animated style
   const heroStyle = !isClient 
