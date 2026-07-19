@@ -5,13 +5,6 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -20,7 +13,40 @@
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: #0f1419; /* Tambahkan base dark color biar gak putih kalau ketarik */
+}
+
+/* Global Outline Fix for ASMR smoothness */
+*:focus {
+  outline: none !important;
+}
+
+/* Add a beautiful custom focus ring instead of the ugly default outline */
+*:focus-visible {
+  outline: 2px solid rgba(6, 182, 212, 0.5) !important;
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* Remove tap highlight on mobile that looks like a weird outline */
+a, button, input, textarea, select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure buttons don't have default browser styling */
+button {
+  border: none;
+  background: none;
+  padding: 0;
 }
