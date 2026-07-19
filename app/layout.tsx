@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portfolio-eta-umber-75.vercel.app"),
   title: "Farhan Raisprawira | Full-stack Developer",
   description: "Portfolio of Farhan Raisprawira Hartama, a Full-stack Developer & Mobile Engineer specializing in Next.js, React, Flutter, and Go.",
   keywords: ["Farhan Raisprawira", "Farhan Hartama", "Portfolio", "Full-stack Developer", "Flutter Developer", "Frontend", "Backend", "Next.js"],
