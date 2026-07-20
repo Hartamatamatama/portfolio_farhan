@@ -21,6 +21,14 @@ export function useInView(threshold = 0.1) {
     );
 
     if (ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      // Jika elemen sudah berada di dalam viewport saat mount, langsung tampilkan
+      // (hindari blink: muncul -> hilang -> muncul lagi)
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        setIsVisible(true);
+        setHasHydrated(true);
+        return;
+      }
       observer.observe(ref.current);
     }
 
