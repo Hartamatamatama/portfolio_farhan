@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useInView } from "@/hooks/useInView";
 
 // Helper function untuk ASMR smooth style transition
@@ -13,6 +14,9 @@ const getScrollStyle = (hasHydrated: boolean, isVisible: boolean, delay: string)
 };
 
 export default function About() {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => setIsClient(true), []);
+
   const { ref: titleRef, isVisible: titleVisible, hasHydrated: titleHydrated } = useInView();
   const { ref: bgRef, isVisible: bgVisible, hasHydrated: bgHydrated } = useInView();
   const { ref: eduRef, isVisible: eduVisible, hasHydrated: eduHydrated } = useInView();
@@ -28,6 +32,7 @@ export default function About() {
       position: "relative",
     }}>
       <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 20px", position: "relative", zIndex: 1 }}>
+        {/* Title */}
         <div ref={titleRef} style={{
           marginBottom: "60px",
           ...getScrollStyle(titleHydrated, titleVisible, "0s")
@@ -80,39 +85,34 @@ export default function About() {
             Background
           </h2>
           <div style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            color: "#cbd5e1",
+            background: "rgba(30, 41, 59, 0.4)",
+            border: "1px solid rgba(100, 116, 139, 0.2)",
+            borderRadius: "16px",
+            padding: "30px",
+            fontSize: "1.1rem",
             lineHeight: 1.8,
-            fontSize: "1.05rem",
-          }}>
-            <p style={{
-              padding: "20px",
-              background: "rgba(30, 41, 59, 0.3)",
-              borderRadius: "12px",
-              borderLeft: "3px solid #06b6d4",
-              transition: "all 0.3s",
-            }}>
-              Saya Farhan Raisprawira Hartama, mahasiswa Teknik Informatika Angkatan 2023 di GI (Global Institute). Saat ini sedang menyelesaikan thesis tentang learning analytics platform dengan fokus pada Pomodoro Technique tracking dan AI-powered insights.
+            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            cursor: "default",
+          }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.borderColor = "rgba(6, 182, 212, 0.4)";
+              e.currentTarget.style.transform = "translateY(-5px)";
+              e.currentTarget.style.boxShadow = "0 20px 40px rgba(6, 182, 212, 0.1)";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.borderColor = "rgba(100, 116, 139, 0.2)";
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            <p style={{ marginBottom: "20px" }}>
+              Halo! Saya adalah <strong style={{ color: "#06b6d4" }}>mahasiswa Teknik Informatika Angkatan 2023 di GI (Global Institute)</strong> dengan passion mendalam di bidang <strong style={{ color: "#3b82f6" }}>Pengembangan Perangkat Lunak</strong> (Web & Mobile).
             </p>
-            <p style={{
-              padding: "20px",
-              background: "rgba(30, 41, 59, 0.3)",
-              borderRadius: "12px",
-              borderLeft: "3px solid #3b82f6",
-              transition: "all 0.3s",
-            }}>
-              Di KAMINDO Consulting, saya berkontribusi dalam dokumentasi dan compliance automation untuk standar ISO 27001, 37001, dan 9001. Pengalaman ini memberikan insight mendalam tentang quality assurance dan enterprise-level documentation systems.
+            <p style={{ marginBottom: "20px" }}>
+              Saat ini, saya sedang fokus mempelajari teknologi web ter-update seperti <strong style={{ color: "#a855f7" }}>PHP, Laravel, Next.js</strong> dan ekosistem Artificial Intelligence.
             </p>
-            <p style={{
-              padding: "20px",
-              background: "rgba(30, 41, 59, 0.3)",
-              borderRadius: "12px",
-              borderLeft: "3px solid #a855f7",
-              transition: "all 0.3s",
-            }}>
-              Saya passionate tentang building products yang solve real problems—dari learning management systems hingga compliance automation platforms. Setiap proyek adalah kesempatan untuk menggabungkan technical excellence dengan user-centric design.
+            <p>
+              Di luar koding, saya selalu mencari tantangan baru, terus berkreasi membangun aplikasi cerdas (Smart Apps) berbasis AI, dan ikut aktif memimpin organisasi kampus.
             </p>
           </div>
         </section>
@@ -143,42 +143,131 @@ export default function About() {
             }}>🎓</span>
             Education
           </h2>
-          <div style={{
-            background: "rgba(30, 41, 59, 0.4)",
-            border: "1px solid rgba(100, 116, 139, 0.2)",
-            borderRadius: "16px",
-            padding: "30px",
-            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            cursor: "default",
-          }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.borderColor = "#a855f7";
-              e.currentTarget.style.transform = "translateY(-5px)";
-              e.currentTarget.style.boxShadow = "0 20px 40px rgba(168, 85, 247, 0.15)";
+          
+          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            {/* Kuliah */}
+            <div style={{
+              background: "rgba(30, 41, 59, 0.4)",
+              border: "1px solid rgba(100, 116, 139, 0.2)",
+              borderRadius: "16px",
+              padding: "30px",
+              transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+              cursor: "default",
             }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.borderColor = "rgba(100, 116, 139, 0.2)";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = "#a855f7";
+                e.currentTarget.style.transform = "translateY(-5px)";
+                e.currentTarget.style.boxShadow = "0 20px 40px rgba(168, 85, 247, 0.15)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = "rgba(100, 116, 139, 0.2)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <h3 style={{
+                fontSize: "1.5rem",
+                fontWeight: 600,
+                color: "#e2e8f0",
+                marginBottom: "8px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: "10px",
+              }}>
+                GI (Global Institute)
+                <span style={{
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  color: "#94a3b8",
+                  background: "rgba(15, 23, 42, 0.6)",
+                  padding: "6px 14px",
+                  borderRadius: "20px",
+                  border: "1px solid rgba(100, 116, 139, 0.3)",
+                }}>2023 - 2027 (Expected)</span>
+              </h3>
+              <p style={{
+                fontSize: "1.1rem",
+                color: "#a855f7",
+                marginBottom: "16px",
+                fontWeight: 500,
+              }}>Teknik Informatika</p>
+              <ul style={{
+                listStyle: "none",
+                padding: 0,
+                margin: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                color: "#94a3b8",
+              }}>
+                <li style={{ display: "flex", gap: "10px" }}><span style={{ color: "#a855f7" }}>▹</span> <strong>IPK: 4.0</strong></li>
+                <li style={{ display: "flex", gap: "10px" }}><span style={{ color: "#a855f7" }}>▹</span> Fokus mempelajari Web Development (PHP, Laravel) & Artificial Intelligence.</li>
+                <li style={{ display: "flex", gap: "10px" }}><span style={{ color: "#a855f7" }}>▹</span> Aktif di UKM Core IT, English Club, Entrepreneur, JAGOKU, dan Leader Global Accounting Club.</li>
+              </ul>
+            </div>
+            
+            {/* SMK */}
+            <div style={{
+              background: "rgba(30, 41, 59, 0.4)",
+              border: "1px solid rgba(100, 116, 139, 0.2)",
+              borderRadius: "16px",
+              padding: "30px",
+              transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+              cursor: "default",
             }}
-          >
-            <h3 style={{
-              fontSize: "1.5rem",
-              fontWeight: 600,
-              color: "#a855f7",
-              marginBottom: "15px",
-            }}>
-              GI (Global Institute)
-            </h3>
-            <p style={{ color: "#94a3b8", marginBottom: "10px", fontSize: "1.05rem" }}>
-              Bachelor of Engineering in Information Technology
-            </p>
-            <p style={{ color: "#cbd5e1", marginBottom: "15px" }}>
-              2023 - 2027 (Expected) | Jakarta, Indonesia
-            </p>
-            <p style={{ color: "#cbd5e1", fontSize: "1.1rem" }}>
-              <strong style={{ color: "#22c55e" }}>GPA: 3.6+</strong> | Graduation: Agustus 2027
-            </p>
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = "#a855f7";
+                e.currentTarget.style.transform = "translateY(-5px)";
+                e.currentTarget.style.boxShadow = "0 20px 40px rgba(168, 85, 247, 0.15)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = "rgba(100, 116, 139, 0.2)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <h3 style={{
+                fontSize: "1.5rem",
+                fontWeight: 600,
+                color: "#e2e8f0",
+                marginBottom: "8px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: "10px",
+              }}>
+                SMK Negeri 3 Kuningan
+                <span style={{
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  color: "#94a3b8",
+                  background: "rgba(15, 23, 42, 0.6)",
+                  padding: "6px 14px",
+                  borderRadius: "20px",
+                  border: "1px solid rgba(100, 116, 139, 0.3)",
+                }}>2020 - 2023</span>
+              </h3>
+              <p style={{
+                fontSize: "1.1rem",
+                color: "#a855f7",
+                marginBottom: "16px",
+                fontWeight: 500,
+              }}>Multimedia</p>
+              <ul style={{
+                listStyle: "none",
+                padding: 0,
+                margin: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                color: "#94a3b8",
+              }}>
+                <li style={{ display: "flex", gap: "10px" }}><span style={{ color: "#a855f7" }}>▹</span> Mendapatkan Ranking 1 Pada Kelas XI Semester 2.</li>
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -206,7 +295,7 @@ export default function About() {
               justifyContent: "center",
               fontSize: "16px",
             }}>⚡</span>
-            Core Competencies
+            Keahlian Teknis
           </h2>
           <div style={{
             display: "grid",
@@ -215,27 +304,27 @@ export default function About() {
           }}>
             {[
               {
-                title: "Mobile Development",
-                icon: "📱",
-                skills: ["Flutter", "Dart", "Riverpod", "Provider"],
+                title: "Programming",
+                icon: "💻",
+                skills: ["PHP", "JavaScript", "C#", "C++", "Python", "Java"],
                 color: "#06b6d4",
               },
               {
-                title: "Frontend",
-                icon: "🎨",
-                skills: ["React", "Next.js", "TypeScript", "TailwindCSS"],
+                title: "Web & Framework",
+                icon: "🌐",
+                skills: ["Laravel", "CodeIgniter", "HTML", "CSS"],
                 color: "#3b82f6",
               },
               {
-                title: "Backend",
+                title: "Tools & Deployment",
                 icon: "🔧",
-                skills: ["Go", "PostgreSQL", "Supabase", "API Design"],
+                skills: ["MySQL", "GitHub", "SSH Deployment", "CPanel"],
                 color: "#a855f7",
               },
               {
-                title: "DevOps & Tools",
-                icon: "🚀",
-                skills: ["Git", "Docker", "CI/CD", "Linux"],
+                title: "Other Skills",
+                icon: "🤖",
+                skills: ["OpenRouter (AI)", "Canva", "Microsoft Office"],
                 color: "#22c55e",
               },
             ].map((category, idx) => (
@@ -342,11 +431,11 @@ export default function About() {
             gap: "16px",
           }}>
             {[
-              { emoji: "🏆", text: "Maintaining GPA 3.6+ throughout college years" },
-              { emoji: "🚀", text: "Developed Smart Learning Tracker with 13+ routes and real-time analytics" },
-              { emoji: "📋", text: "Designed compliance documentation systems for ISO standards" },
-              { emoji: "🎓", text: "Thesis on learning analytics combining Pomodoro technique with AI insights" },
-              { emoji: "💡", text: "Led multiple full-stack projects from concept to deployment" },
+              { emoji: "🏆", text: "Juara 1 Lomba Cerdas Cermat Tingkat Kampus" },
+              { emoji: "🎓", text: "Meraih IPK 4.0 di Program Studi Teknik Informatika GI" },
+              { emoji: "🌟", text: "Leader UKM Global Accounting Club (Mengajar Basic Accounting)" },
+              { emoji: "🚀", text: "Mendevelop puluhan website admin & sistem informasi untuk berbagai klien" },
+              { emoji: "🧠", text: "Sertifikasi Big Data Analytics & Cloud Practitioner Essentials" },
             ].map((achievement, i) => (
               <div
                 key={i}

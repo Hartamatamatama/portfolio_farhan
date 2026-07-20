@@ -18,80 +18,78 @@ export default function Projects() {
   const { ref: descRef, isVisible: descVisible, hasHydrated: descHydrated } = useInView();
   const { ref: gridRef, isVisible: gridVisible, hasHydrated: gridHydrated } = useInView();
 
-  const projects = [
+    const projects = [
     {
-      title: "Smart Learning Tracker",
-      description: "Comprehensive learning management platform built with Flutter + Supabase for tracking study sessions, mood patterns, and productivity insights.",
-      status: "In Progress",
-      highlights: [
-        "13+ Routes dengan Riverpod state management",
-        "Pomodoro & Stopwatch timer dengan foreground service alarm 3x",
-        "Mood tracking dengan 4 parameter, 5 warna split dark/light",
-        "History search dengan pagination (10/25/50/100) + filter & export",
-        "AI-powered report generation via OpenRouter",
-        "Session chaining untuk continued learning sessions",
-        "Analytics dashboard dengan 7/14/30 hari insights",
-      ],
-      tags: ["Flutter", "Dart", "Riverpod", "Supabase", "PostgreSQL"],
-      icon: "📱",
-      accent: "#06b6d4",
+      title: "Smart Learning Tracker AI",
+      description: "Aplikasi dan website tracking pembelajaran cerdas berbasis Artificial Intelligence dengan timer Pomodoro dan analitik belajar.",
+      tags: ["Artificial Intelligence", "Flutter", "Supabase"],
+      link: "#",
+      color: "#06b6d4",
+      highlights: ["Timer Pomodoro & Stopwatch", "AI Learning Report", "Mood & Analytics Tracking"]
     },
     {
-      title: "Thesis: Learning Analytics Dashboard",
-      description: "Full-stack analytics platform analyzing student engagement patterns through Pomodoro sessions. Combines Flutter frontend with Go backend.",
-      status: "In Progress",
-      highlights: [
-        "Real-time Pomodoro session tracking",
-        "Advanced analytics: 7/14/30-day trend analysis",
-        "AI insights menggunakan pattern recognition",
-        "Custom dashboard dengan drag-and-drop widgets",
-      ],
-      tags: ["Flutter", "Go", "PostgreSQL", "Analytics", "AI"],
-      icon: "📊",
-      accent: "#3b82f6",
+      title: "Zodiac Forecasting AI",
+      description: "Aplikasi peramalan zodiak berbasis Artificial Intelligence menggunakan model OpenRouter.",
+      tags: ["Artificial Intelligence", "Python", "OpenRouter"],
+      link: "#",
+      color: "#3b82f6",
+      highlights: ["Natural Language Processing", "REST API Integration", "JSON Prediction Output"]
     },
     {
-      title: "ISO Compliance Automation",
-      description: "Enterprise compliance documentation system for ISO 27001, 37001, and 9001 standards.",
-      status: "Production",
-      highlights: [
-        "Automated document generation & validation",
-        "Compliance checklist automation",
-        "Audit trail & version control",
-        "Multi-client support untuk KAMINDO Consulting",
-      ],
-      tags: ["Documentation", "Compliance", "Enterprise"],
-      icon: "📋",
-      accent: "#22c55e",
+      title: "Car Rental System",
+      description: "Website manajemen rental mobil dengan fitur pemesanan dan ketersediaan armada real-time.",
+      tags: ["PHP", "Laravel", "MySQL"],
+      link: "#",
+      color: "#a855f7",
+      highlights: ["Booking & Availability", "Admin Dashboard", "Payment Gateway"]
     },
     {
-      title: "BIMBEL MAMA ALIF Platform",
-      description: "Learning platform untuk private tutoring center dengan progress tracking dan parent communication.",
-      status: "In Progress",
-      highlights: [
-        "Student progress dashboard",
-        "Parent & tutor communication hub",
-        "Attendance tracking system",
-        "Performance analytics per subject",
-      ],
-      tags: ["React", "Next.js", "Supabase"],
-      icon: "🎓",
-      accent: "#a855f7",
+      title: "Creative Academy Ticketing",
+      description: "Platform pembelian tiket workshop Creative Academy dengan framework Laravel.",
+      tags: ["PHP", "Laravel", "Ticketing"],
+      link: "#",
+      color: "#22c55e",
+      highlights: ["Event Management", "QR Code Check-in", "E-Ticket Generation"]
     },
     {
-      title: "This Portfolio",
-      description: "Interactive portfolio website built with Next.js, TypeScript, and inline CSS. Showcasing all projects and experiences with ASMR animations.",
-      status: "Production",
-      highlights: [
-        "Full-stack Next.js 16 dengan App Router",
-        "Dark mode dengan gradient design system",
-        "Fully responsive & accessible (WCAG compliant)",
-        "Static generation untuk fast page load",
-        "Typing effect, hover animations, scroll reveals",
-      ],
-      tags: ["Next.js", "React", "TypeScript", "CSS"],
-      icon: "🦇",
-      accent: "#06b6d4",
+      title: "Library Information System",
+      description: "Website sistem informasi perpustakaan menggunakan framework CodeIgniter.",
+      tags: ["PHP", "CodeIgniter", "MySQL"],
+      link: "#",
+      color: "#f59e0b",
+      highlights: ["Catalog Search", "Loan & Return", "Member Management"]
+    },
+    {
+      title: "Agriculture Info System",
+      description: "Website sistem informasi khusus yang dirancang untuk membantu para petani.",
+      tags: ["Web Development", "UI/UX", "PHP"],
+      link: "#",
+      color: "#ec4899",
+      highlights: ["Crop Database", "Weather Advisory", "Farmer Forum"]
+    },
+    {
+      title: "Fruit Catcher Game",
+      description: "Aplikasi game kasual 'Fruit Catcher' interaktif dengan sistem skor.",
+      tags: ["Game Development", "Java"],
+      link: "#",
+      color: "#ef4444",
+      highlights: ["Sprite Animation", "Collision Detection", "High Score System"]
+    },
+    {
+      title: "School Payment System",
+      description: "Aplikasi desktop sederhana untuk manajemen pembayaran SPP Sekolah.",
+      tags: ["Java", "Desktop App"],
+      link: "#",
+      color: "#6366f1",
+      highlights: ["Monthly Billing", "Receipt Print", "Student Ledger"]
+    },
+    {
+      title: "Multiple Admin Dashboards",
+      description: "Mendevelop puluhan website panel admin dengan berbagai macam tema dan kebutuhan bisnis.",
+      tags: ["Full-stack", "Dashboard", "CMS"],
+      link: "#",
+      color: "#8b5cf6",
+      highlights: ["Role-based Access", "Data CRUD", "Custom Theme Engine"]
     },
   ];
 
@@ -162,9 +160,9 @@ export default function Projects() {
                 
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.borderColor = project.accent;
+                e.currentTarget.style.borderColor = project.color;
                 e.currentTarget.style.transform = "translateY(-8px)";
-                e.currentTarget.style.boxShadow = `0 24px 48px ${project.accent}15`;
+                e.currentTarget.style.boxShadow = `0 24px 48px ${project.color}15`;
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.borderColor = "rgba(100, 116, 139, 0.2)";
@@ -179,7 +177,7 @@ export default function Projects() {
                 left: 0,
                 right: 0,
                 height: "3px",
-                background: `linear-gradient(to right, ${project.accent}, transparent)`,
+                background: `linear-gradient(to right, ${project.color}, transparent)`,
                 opacity: 0,
                 transition: "opacity 0.3s",
               }}
@@ -195,7 +193,7 @@ export default function Projects() {
               <div style={{ marginBottom: "20px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: "15px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                    <span style={{ fontSize: "2rem" }}>{project.icon}</span>
+                    <span style={{ width: "14px", height: "14px", borderRadius: "50%", backgroundColor: project.color, boxShadow: `0 0 12px ${project.color}`, flexShrink: 0 }}></span>
                     <h2 style={{
                       fontSize: "1.5rem",
                       fontWeight: 700,
@@ -205,19 +203,6 @@ export default function Projects() {
                       {project.title}
                     </h2>
                   </div>
-                  <span style={{
-                    backgroundColor: project.status === "Production" ? "rgba(34, 197, 94, 0.15)" : "rgba(59, 130, 246, 0.15)",
-                    color: project.status === "Production" ? "#4ade80" : "#60a5fa",
-                    padding: "6px 14px",
-                    borderRadius: "20px",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    whiteSpace: "nowrap",
-                    border: `1px solid ${project.status === "Production" ? "rgba(34, 197, 94, 0.3)" : "rgba(59, 130, 246, 0.3)"}`,
-                    transition: "all 0.3s",
-                  }}>
-                    {project.status}
-                  </span>
                 </div>
                 <p style={{ color: "#94a3b8", fontSize: "1rem", lineHeight: 1.6 }}>
                   {project.description}
@@ -229,7 +214,7 @@ export default function Projects() {
                 <h3 style={{
                   fontSize: "0.8rem",
                   fontWeight: 700,
-                  color: project.accent,
+                  color: project.color,
                   textTransform: "uppercase",
                   letterSpacing: "1.5px",
                   marginBottom: "15px",
@@ -248,7 +233,7 @@ export default function Projects() {
                         transition: "all 0.3s",
                       }}
                       onMouseOver={(e) => {
-                        e.currentTarget.style.color = project.accent;
+                        e.currentTarget.style.color = project.color;
                         e.currentTarget.style.transform = "translateX(5px)";
                       }}
                       onMouseOut={(e) => {
@@ -259,7 +244,7 @@ export default function Projects() {
                       <span style={{
                         position: "absolute",
                         left: "0",
-                        color: project.accent,
+                        color: project.color,
                         transition: "all 0.3s",
                       }}>▹</span>
                       {highlight}
@@ -291,10 +276,10 @@ export default function Projects() {
                       cursor: "default",
                     }}
                     onMouseOver={(e) => {
-                      e.currentTarget.style.borderColor = project.accent;
-                      e.currentTarget.style.color = project.accent;
+                      e.currentTarget.style.borderColor = project.color;
+                      e.currentTarget.style.color = project.color;
                       e.currentTarget.style.transform = "scale(1.1)";
-                      e.currentTarget.style.boxShadow = `0 4px 12px ${project.accent}22`;
+                      e.currentTarget.style.boxShadow = `0 4px 12px ${project.color}22`;
                     }}
                     onMouseOut={(e) => {
                       e.currentTarget.style.borderColor = "rgba(100, 116, 139, 0.3)";
